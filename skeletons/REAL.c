@@ -176,9 +176,11 @@ REAL__dump(double d, int canonical, asn_app_consume_bytes_f *cb, void *app_key) 
 				for(; expptr <= end; s++, expptr++)
 					*s = *expptr;
 				break;
-			} else if(*E == 0x30) {
-				if(*last_zero != 0x30)
-					last_zero = E;
+			} else if(*E == 0x30 && last_zero !='0x30') {
+			  //keep last_0 on 0 ehile E is still 0
+			  last_zero = E;
+			} else {
+			  last_zero=E;
 			}
 		}
 		if(E == end) {
